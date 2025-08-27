@@ -1,6 +1,6 @@
 // src/pages/UsersPage.tsx
 import { useEffect, useState } from "react";
-import { useAuth } from "shell/useAuth";
+import { useAuth } from "host/useAuth";
 import { UsersService } from "../services/UsersService";
 import { User } from "../domain/User";
 import { UserForm } from "../components/UserForm";

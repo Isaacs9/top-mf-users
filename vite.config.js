@@ -12,7 +12,7 @@ export default defineConfig({
         "./UsersApp": "./src/UsersApp.jsx"
       },
       remotes: {
-        shell: "http://localhost:5000/assets/remoteEntry.js",
+        host: "http://localhost:5000/assets/remoteEntry.js",
       },
       shared: ["react", "react-dom"]
     })

@@ -1,14 +1,13 @@
 # Microfrontend Top Users (mf-top-users)
 
-Este projeto é o microfrontend responsável pelo módulo de **usuários** dentro da plataforma Top. Ele é desenvolvido em **React 18 + Vite** e utiliza **Module Federation** para integração com o frontend shell principal (`top-frontend`).
+Este projeto é o microfrontend responsável pelo módulo de **usuários** dentro da plataforma Top. Ele é desenvolvido 
+em **React 18 + Vite** e utiliza **Module Federation** para integração com o frontend host principal (`top-frontend`).
 
 ## Estrutura do Projeto
 
 ```
 mf-top-users/
 ├─ src/
-│  ├─ auth/                # Contexto de autenticação compartilhado
-│  │  └─ AuthContext.tsx
 │  ├─ components/          # Componentes React reutilizáveis
 │  ├─ pages/               # Páginas do microfrontend (UsersPage etc.)
 │  ├─ services/            # Serviços para chamadas à API do gateway
@@ -66,10 +65,9 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         "./UsersApp": "./src/App.tsx",
-        "./AuthContext": "./src/auth/AuthContext.tsx"
       },
       remotes: {
-        shell: "http://localhost:5000/assets/remoteEntry.js"
+        host: "http://localhost:5000/assets/remoteEntry.js"
       },
       shared: ["react", "react-dom"]
     })
@@ -88,14 +86,15 @@ export default defineConfig({
 ```
 
 * `exposes`: exporta componentes e contexto para o shell e outros MF.
-* `remotes`: importa o shell principal.
+* `remotes`: importa o host principal.
 * `shared`: compartilha dependências comuns para evitar duplicação.
 
 ---
 
-## Integração com Shell Principal
+## Integração com Host Principal
 
-O microfrontend de usuários é consumido pelo `top-frontend` via Module Federation. No shell, você importa o `UsersApp` e `AuthContext`:
+O microfrontend de usuários é consumido pelo `top-frontend` via Module Federation. No host, você importa o `UsersApp` e 
+`AuthContext`:
 
 ```ts
 const UsersApp = React.lazy(() => import("users/UsersApp"));
@@ -130,17 +129,16 @@ coverage/
    └─ UserService.test.ts
 ```
 
-Você pode adicionar prints da cobertura aqui:
-
-![Print de cobertura](./docs/coverage-users.png)
-
 ---
 
 ## Observações
 
 * Certifique-se de que o **API Gateway (`top-api-gateway`)** esteja rodando em `http://localhost:3000` para que o microfrontend consiga consumir os endpoints de usuários.
-* Durante o desenvolvimento, use `npm run dev` para hot reload e integração com o shell.
-* Para produção, execute `npm run build` e configure o shell para apontar para o build gerado (`/dist/assets/remoteEntry.js`).
+* Durante o desenvolvimento, use `npm run dev` para hot reload e integração com o host.
+* Para produção, execute `npm run build` e configure o host para apontar para o build gerado (`/dist/assets/remoteEntry.
+js`).
+
+---
 
 ## 👨‍💻 Autores
 
