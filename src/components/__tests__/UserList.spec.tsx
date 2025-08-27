@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { UserList } from '../UserList';
 import { User } from '../../domain/User';
 
-// Mock the UserItem component to simplify testing
 jest.mock('../UserItem', () => ({
   UserItem: ({ user, onUpdate, onDelete }) => (
     <li data-testid={`user-item-${user.id}`}>
@@ -36,12 +35,10 @@ describe('UserList', () => {
       />
     );
 
-    // Check if all users are rendered
     expect(screen.getByTestId('user-item-1')).toBeInTheDocument();
     expect(screen.getByTestId('user-item-2')).toBeInTheDocument();
     expect(screen.getByTestId('user-item-3')).toBeInTheDocument();
 
-    // Check if the correct number of UserItem components are rendered
     const userItems = screen.getAllByTestId(/user-item-/);
     expect(userItems).toHaveLength(3);
   });
@@ -55,11 +52,9 @@ describe('UserList', () => {
       />
     );
 
-    // Check if no UserItem components are rendered
     const userItems = screen.queryAllByTestId(/user-item-/);
     expect(userItems).toHaveLength(0);
 
-    // Check if the list element is still rendered
     const listElement = screen.getByRole('list');
     expect(listElement).toBeInTheDocument();
   });

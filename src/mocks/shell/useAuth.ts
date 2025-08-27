@@ -1,4 +1,3 @@
-// Mock for the useAuth hook from shell
 export const useAuth = jest.fn().mockReturnValue({
   user: {
     id: 1,

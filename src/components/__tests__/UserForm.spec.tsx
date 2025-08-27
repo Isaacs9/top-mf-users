@@ -12,7 +12,6 @@ describe('UserForm', () => {
   it('renders form fields correctly', () => {
     render(<UserForm onCreate={mockOnCreate} />);
 
-    // Check if all form fields are rendered
     expect(screen.getByPlaceholderText('Nome')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Senha')).toBeInTheDocument();
@@ -26,12 +25,10 @@ describe('UserForm', () => {
     const emailInput = screen.getByPlaceholderText('Email');
     const passwordInput = screen.getByPlaceholderText('Senha');
 
-    // Type in the input fields
     await userEvent.type(nomeInput, 'John Doe');
     await userEvent.type(emailInput, 'john@example.com');
     await userEvent.type(passwordInput, 'password123');
 
-    // Check if input values are updated
     expect(nomeInput).toHaveValue('John Doe');
     expect(emailInput).toHaveValue('john@example.com');
     expect(passwordInput).toHaveValue('password123');
@@ -45,15 +42,12 @@ describe('UserForm', () => {
     const passwordInput = screen.getByPlaceholderText('Senha');
     const submitButton = screen.getByText('Criar Usuário');
 
-    // Fill in the form
     await userEvent.type(nomeInput, 'John Doe');
     await userEvent.type(emailInput, 'john@example.com');
     await userEvent.type(passwordInput, 'password123');
 
-    // Submit the form
     fireEvent.click(submitButton);
 
-    // Check if onCreate was called with the correct data
     expect(mockOnCreate).toHaveBeenCalledTimes(1);
     expect(mockOnCreate).toHaveBeenCalledWith({
       nome: 'John Doe',
@@ -70,15 +64,12 @@ describe('UserForm', () => {
     const passwordInput = screen.getByPlaceholderText('Senha');
     const submitButton = screen.getByText('Criar Usuário');
 
-    // Fill in the form
     await userEvent.type(nomeInput, 'John Doe');
     await userEvent.type(emailInput, 'john@example.com');
     await userEvent.type(passwordInput, 'password123');
 
-    // Submit the form
     fireEvent.click(submitButton);
 
-    // Check if form fields are reset
     expect(nomeInput).toHaveValue('');
     expect(emailInput).toHaveValue('');
     expect(passwordInput).toHaveValue('');

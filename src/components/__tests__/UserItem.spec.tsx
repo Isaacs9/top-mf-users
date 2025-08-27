@@ -25,11 +25,9 @@ describe('UserItem', () => {
       />
     );
 
-    // Check if user name and email are displayed
     expect(screen.getByText(/Test User/i)).toBeInTheDocument();
     expect(screen.getByText(/test@example.com/i)).toBeInTheDocument();
 
-    // Check if buttons are rendered
     expect(screen.getByText('Editar')).toBeInTheDocument();
     expect(screen.getByText('Excluir')).toBeInTheDocument();
   });
@@ -43,10 +41,8 @@ describe('UserItem', () => {
       />
     );
 
-    // Click the edit button
     fireEvent.click(screen.getByText('Editar'));
 
-    // Check if onUpdate was called with the correct user id
     expect(mockOnUpdate).toHaveBeenCalledTimes(1);
     expect(mockOnUpdate).toHaveBeenCalledWith(mockUser.id);
   });
@@ -60,10 +56,8 @@ describe('UserItem', () => {
       />
     );
 
-    // Click the delete button
     fireEvent.click(screen.getByText('Excluir'));
 
-    // Check if onDelete was called with the correct user id
     expect(mockOnDelete).toHaveBeenCalledTimes(1);
     expect(mockOnDelete).toHaveBeenCalledWith(mockUser.id);
   });
