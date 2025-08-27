@@ -1,5 +1,5 @@
 // Import jest-dom for DOM assertions
-import '@testing-library/jest-dom';
+require('@testing-library/jest-dom');
 
 // Mock global objects if needed
 global.fetch = jest.fn();
